@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, ButtonGroup } from 'reactstrap';
 
 const Tabs = ({ items, onItemClick }) => {
-  const [activeIdx, setActiveIdx] = useState(1);
+  const [activeIdx, setActiveIdx] = useState(0);
   if (!items || !items.length) return null;
 
   const handleClick = (idx) => () => {

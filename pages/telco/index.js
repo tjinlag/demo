@@ -6,6 +6,7 @@ import Header from 'components/Header'
 import Footer from 'layouts/Footer';
 import Tabs from 'components/Telco/Tabs';
 import BuyCard from 'components/Telco/BuyCard';
+import BuyData from 'components/Telco/BuyData';
 import { getCards } from 'services/telco';
 
 const Type = {
@@ -15,14 +16,14 @@ const Type = {
 }
 
 const tabs = [
-  { type: Type.Topup, content: 'Nạp tiền điện thoại' },
   { type: Type.Card, content: 'Mua thẻ điện thoại' },
   { type: Type.Data, content: 'Mua thẻ data 3G 4G' },
+  { type: Type.Topup, content: 'Nạp tiền điện thoại' },
 ]
 
 const Telco = ({ data }) => {
   // const [data, setData] = useState(null);
-  const [type, setType] = useState(Type.Card);
+  const [type, setType] = useState(Type.Data);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +50,8 @@ const Telco = ({ data }) => {
         <Tabs items={tabs} onItemClick={handleItemClick} />
 
         { type === Type.Card && <BuyCard data={data} /> }
+        { type === Type.Data && <BuyData /> }
+
       </div>
 
       <Footer />

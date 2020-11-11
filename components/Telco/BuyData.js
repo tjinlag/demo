@@ -4,40 +4,43 @@ import Card from './Card';
 import Providers from './Providers';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'recoils/loadingState';
-import { buyCard } from 'services/telco';
+import { buyCard, getDatas } from 'services/telco';
 import { useVisible } from 'hooks/state';
 import Portal from 'layouts/Portal';
 import PayPopup from './PayPopup';
+import Package from './Package';
 
-const BuyCard = ({ data }) => {
+const BuyData = () => {
+  const data = getDatas();
   const providers = useMemo(() => {
     return data.map(({ provider, url }) => ({ name: provider, logo: url }));
-  }, [data]);
+  }, []);
   const [selectedProvider, setSelectedProvider] = useState(providers[0]);
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedPkg, setSelectedPkg] = useState(null);
   const setLoading = useSetRecoilState(loadingState);
   const [popupVisible, hidePopup, showPopup] = useVisible(false);
 
-  const cards = useMemo(() => {
-    const { cards } = data.find(({ provider }) => provider === selectedProvider.name);
-    setSelectedCard(cards[0]);
-    return cards;
-  }, [data, selectedProvider])
+  const packages = useMemo(() => {
+    const { packages } = data.find(({ provider }) => provider === selectedProvider.name);
+    setSelectedPkg(packages[0]);
+    return packages;
+  }, [selectedProvider])
 
   const handleProviderClick = (provider) => {
     setSelectedProvider(provider)
   }
 
-  const handleCardClick = (card) => () => {
-    setSelectedCard(card);
+  const handlePackageClick = (pkg) => () => {
+    setSelectedPkg(pkg);
   }
 
   const handleSubmit = async () => {
-    console.log({ selectedProvider, selectedCard });
+    console.log({ selectedProvider, selectedPkg });
     setLoading(true)
-    await buyCard(selectedProvider.name, selectedCard.denomination);
-    setLoading(false);
-    showPopup();
+    setTimeout(() => {
+      setLoading(false);
+      showPopup();
+    }, 2e3)
   }
 
   return (
@@ -50,15 +53,15 @@ const BuyCard = ({ data }) => {
 
       <div>
         <div className="d-block mt-2 mx-5" style={{ width: 1000 }}>
-          { cards.map((card, idx) => (
-            <Card
+          { packages.map((pkg, idx) => (
+            <Package
               key={idx}
               data={{
-                ...card,
+                ...pkg,
                 logo: selectedProvider.logo,
               }}
-              active={card === selectedCard}
-              onClick={handleCardClick(card)}
+              active={pkg === selectedPkg}
+              onClick={handlePackageClick(pkg)}
             />
           ))}
         </div>
@@ -73,10 +76,10 @@ const BuyCard = ({ data }) => {
 
       { popupVisible && (
         <Portal>
-          {!!selectedProvider && !!selectedCard && (
+          {!!selectedProvider && !!selectedPkg && (
             <PayPopup
-              content={`Bạn mua 1 thẻ ${selectedProvider.name} - mệnh giá ${Format.money(selectedCard.denomination)}đ`}
               onClose={hidePopup}
+              content={`Bạn mua gói ${selectedPkg.days} ngày - ${selectedPkg.data}`}
             />
           )}
         </Portal>
@@ -85,8 +88,8 @@ const BuyCard = ({ data }) => {
   )
 }
 
-BuyCard.propTypes = {
+BuyData.propTypes = {
 
 }
 
-export default BuyCard;
+export default BuyData;

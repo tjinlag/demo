@@ -11,7 +11,7 @@ const formatRemainTime = (remainTime) => {
   return `${`${minutes}`.padStart(2, '0')}:${`${seconds}`.padStart(2, '0')}`
 }
 
-const PayPopup = ({ onClose, providerName, denomination }) => {
+const PayPopup = ({ onClose, content }) => {
   const remainTime = useCountDown(3*60);
   return (
     <div
@@ -40,7 +40,7 @@ const PayPopup = ({ onClose, providerName, denomination }) => {
           <img src="/assets/images/cancel.png" width={25} height={25} />
         </div>
         <h2 className="text-center">Xác nhận thanh toán</h2>
-        <h6 className="text-center">{`Bạn mua 1 thẻ ${providerName} - mệnh giá ${Format.money(denomination)}đ`}</h6>
+        <h6 className="text-center">{content}</h6>
         <div className="d-flex flex-row p-2">
           <div className="d-flex">
             <img src="/assets/images/qr-tjinlag-facebook.png" style={{ width: 200, height: 200 }} />
