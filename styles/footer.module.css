@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+  width: 100%;
+  background-color: DarkCyan;
+  justify-content: center;
+  font-size: 13px;
+  color: whitesmoke;
+}
+
+.container a:link {
+  color: goldenrod;
+  text-decoration: none;
+}
+
+.logo {
+  padding: 5px;
+}
+
+.logo img {
+  width: 60px;
+  height: 60px;
+}
+
+.info {
+  flex: 1;
+  align-self: center;
+  margin-left: 20px;
+}
+
+.address {
+  margin: 0px;
+}
+
+.badge {
+  align-self: center;
+  padding: 0px 20px;
+}
+
+.badge a {
+  padding: 10px
+}
+
+.badge img {
+  height: 40px;
+  width: auto;
+}
