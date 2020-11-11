@@ -40,7 +40,7 @@ const BuyData = () => {
     setTimeout(() => {
       setLoading(false);
       showPopup();
-    }, 2e3)
+    }, 1e3)
   }
 
   return (
