@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
 import Providers from './Providers';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'recoils/loadingState';
+import { buyCard } from 'services/telco';
+import { useVisible } from 'hooks/state';
+import Portal from 'layouts/Portal';
+import PayPopup from './PayPopup';
 
 const Provider = {
   Viettel: 'viettel',
@@ -10,41 +16,73 @@ const Provider = {
   Vietnamobile: 'vietnamobile',
 }
 
-// const providers = [
-//   { name: Provider.Viettel, logo: 'https://www.vban.vn/Resources/images/logo/viettel1.png' },
-//   { name: Provider.Mobifone, logo: 'https://www.vban.vn/Resources/images/logo/mobiphone1.png' },
-//   { name: Provider.Vinaphone, logo: 'https://www.vban.vn/Resources/images/logo/vinaphone1.png' },
-//   { name: Provider.Vietnamobile, logo: 'https://www.vban.vn/Resources/images/logo/vietnammobile1.png' },
-// ]
-
 const BuyCard = ({ data }) => {
-  const [provider, setProvider] = useState(Provider.Viettel);
+  const providers = useMemo(() => {
+    return data.map(({ provider, url }) => ({ name: provider, logo: url }));
+  }, [data]);
+  const [selectedProvider, setSelectedProvider] = useState(providers[0]);
   const [selectedCard, setSelectedCard] = useState(null);
+  const setLoading = useSetRecoilState(loadingState);
+  const [popupVisible, hidePopup, showPopup] = useVisible(true);
+
+  const cards = useMemo(() => {
+    const { cards } = data.find(({ provider }) => provider === selectedProvider.name);
+    setSelectedCard(cards[0]);
+    return cards;
+  }, [data, selectedProvider])
+
   const handleProviderClick = (provider) => {
-    setProvider(provider)
+    setSelectedProvider(provider)
   }
 
-  const handleCardClick = () => {
-    console.log('handleCardClick');
+  const handleCardClick = (card) => () => {
+    setSelectedCard(card);
   }
 
-  if (!data) return null;
+  const handleSubmit = async () => {
+    console.log({ selectedProvider, selectedCard });
+    setLoading(true)
+    await buyCard(selectedProvider.name, selectedCard.denomination);
+    setLoading(false);
+    showPopup();
+  }
 
-  const providers = data.map(({ provider, url }) => ({ name: provider, logo: url }));
-  console.log(providers);
   return (
-    <div className="d-flex flex-column align-items-center mt-1">
+    <div className="d-flex flex-column align-items-center mt-3 mx-5">
       <Providers
         data={providers}
-        activeProvider={provider}
+        activeProvider={selectedProvider}
         onItemClick={handleProviderClick}
       />
 
-      <div className="d-flex mt-2 flex-start" style={{ width: '100%', color: 'red' }}>
-        { data[0].cards.map((card) => (
-          <Card data={card} onClick={handleCardClick}/>
-        ))}
+      <div>
+        <div className="d-block mt-2 mx-5" style={{ width: 1000 }}>
+          { cards.map((card, idx) => (
+            <Card
+              key={idx}
+              data={{
+                ...card,
+                logo: selectedProvider.logo,
+              }}
+              active={card === selectedCard}
+              onClick={handleCardClick(card)}
+            />
+          ))}
+        </div>
       </div>
+
+      <button
+        type="button"
+        className="btn px-5 font-weight-bold"
+        style={{ backgroundColor: 'steelblue', color: 'white', textDecoration: 'uppercase' }}
+        onClick={handleSubmit}
+      >Xác nhận</button>
+
+      { popupVisible && (
+        <Portal>
+          <PayPopup onClose={hidePopup} providerName={selectedProvider.name} denomination={selectedCard.denomination} />
+        </Portal>
+      )}
     </div>
   )
 }

@@ -11,17 +11,20 @@ const Tabs = ({ items, onItemClick }) => {
   }
 
   return (
-    <ButtonGroup color="red">
-      { items.map((item, idx) => (
-        <Button
-          id={idx}
-          color='info'
-          active={idx === activeIdx}
-          outline
-          onClick={handleClick(idx)}
-        >{item.content}</Button>
-      ))}
-    </ButtonGroup>
+    <div className="text-center">
+      <ButtonGroup color="red">
+        { items.map((item, idx) => (
+          <Button
+            key={idx}
+            color='info'
+            active={idx === activeIdx}
+            outline
+            onClick={handleClick(idx)}
+            style={{ width: 200 }}
+          >{item.content}</Button>
+        ))}
+      </ButtonGroup>
+    </div>
   )
 }
 

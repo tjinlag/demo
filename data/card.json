@@ -12,6 +12,10 @@
         "discount": 400
       },
       {
+        "denomination": 30000,
+        "discount": 600
+      },
+      {
         "denomination": 50000,
         "discount": 1000
       },
@@ -24,8 +28,20 @@
         "discount": 4000
       },
       {
+        "denomination": 300000,
+        "discount": 6000
+      },
+      {
         "denomination": 500000,
         "discount": 10000
+      },
+      {
+        "denomination": 1000000,
+        "discount": 20000
+      },
+      {
+        "denomination": 2000000,
+        "discount": 40000
       }
     ]
   },
@@ -42,6 +58,10 @@
         "discount": 400
       },
       {
+        "denomination": 30000,
+        "discount": 600
+      },
+      {
         "denomination": 50000,
         "discount": 1000
       },
@@ -54,8 +74,20 @@
         "discount": 4000
       },
       {
+        "denomination": 300000,
+        "discount": 6000
+      },
+      {
         "denomination": 500000,
         "discount": 10000
+      },
+      {
+        "denomination": 1000000,
+        "discount": 20000
+      },
+      {
+        "denomination": 2000000,
+        "discount": 40000
       }
     ]
   },
@@ -72,6 +104,10 @@
         "discount": 400
       },
       {
+        "denomination": 30000,
+        "discount": 600
+      },
+      {
         "denomination": 50000,
         "discount": 1000
       },
@@ -84,8 +120,20 @@
         "discount": 4000
       },
       {
+        "denomination": 300000,
+        "discount": 6000
+      },
+      {
         "denomination": 500000,
         "discount": 10000
+      },
+      {
+        "denomination": 1000000,
+        "discount": 20000
+      },
+      {
+        "denomination": 2000000,
+        "discount": 40000
       }
     ]
   },
@@ -102,6 +150,10 @@
         "discount": 400
       },
       {
+        "denomination": 30000,
+        "discount": 600
+      },
+      {
         "denomination": 50000,
         "discount": 1000
       },
@@ -114,8 +166,20 @@
         "discount": 4000
       },
       {
+        "denomination": 300000,
+        "discount": 6000
+      },
+      {
         "denomination": 500000,
         "discount": 10000
+      },
+      {
+        "denomination": 1000000,
+        "discount": 20000
+      },
+      {
+        "denomination": 2000000,
+        "discount": 40000
       }
     ]
   }

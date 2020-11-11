@@ -1,20 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Format from 'utils/format';
+import classNames from 'classnames';
 
-const Card = ({ data, onClick }) => {
+const Card = ({ data, onClick, active }) => {
   if (!data) return null;
-  const { denomination, discount, logo = "https://www.vban.vn/Resources/images/logo/viettel1.png" } = data;
+
+  const { denomination, discount, logo } = data;
   const price = denomination - discount;
+
   return (
-    <div
-      className="d-block m-2 border rounded-lg shadow align-items-center"
-      style={{ width: 100 }}
-      onClick={onClick}
-    >
-      <div className="d-flex flex-column">
-        <img src={logo} style={{ objectFit: 'scale-down', height: 25 }} className="px-auto" />
-        <h6 className="align-self-center mt-1">{Format.money(price)}đ</h6>
+    <div className='d-inline-block m-3 p-2'>
+      <div
+        className={classNames("d-flex p-1 flex-column border rounded-lg shadow-sm", { 'border-primary': active })}
+        style={{ width: 150, color: 'SteelBlue', cursor: 'pointer' }}
+        onClick={onClick}
+      >
+        <img src={logo} style={{ objectFit: 'scale-down', height: 30 }} className="px-auto" />
+        <h5 className="align-self-center mt-1">{Format.money(denomination)}</h5>
+      </div>
+      <div className="text-center mt-2">
+        Giá: <span style={{ fontWeight: 600 }}>{Format.money(price)}đ</span>
       </div>
     </div>
   )

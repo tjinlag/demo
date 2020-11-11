@@ -1,10 +1,24 @@
 import '../styles/globals.css'
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil';
+import Loading from 'layouts/Loading';
+import { loadingState } from 'recoils/loadingState';
 
-const MyApp = ({ Component, pageProps }) => (
-  <RecoilRoot>
-    <Component {...pageProps} />
-  </RecoilRoot>
-)
+const App = ({ Component, pageProps }) => {
+  const isLoading = useRecoilValue(loadingState);
+  return (
+    <>
+      <Component {...pageProps} />
+      { isLoading && <Loading /> }
+    </>
+  );
+}
+
+const MyApp = (props) => {
+  return (
+    <RecoilRoot>
+      <App {...props} />
+    </RecoilRoot>
+  )
+}
 
 export default MyApp;

@@ -3,23 +3,24 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames';
 
 const Providers = ({ data, activeProvider, onItemClick }) => {
-  const handleItemClick = (providerName) => (e) => {
+  const handleItemClick = (provider) => (e) => {
     e.preventDefault();
     e.stopPropagation();
-    onItemClick(providerName);
+    onItemClick(provider);
   }
 
   if (!data) return null;
 
   return (
     <div className="d-flex flex-row">
-      { data.map(({ name, logo }) => (
+      { data.map((provider) => (
         <div
-          className={classNames('m-1 p-1 border', {'border-info': name === activeProvider})}
-          onClick={handleItemClick(name)}
-          id={name}
+          className={classNames('m-1 p-1 border', {'border-primary': provider === activeProvider})}
+          style={{ cursor: "pointer" }}
+          onClick={handleItemClick(provider)}
+          key={provider.name}
         >
-          <img src={logo} height={50} />
+          <img src={provider.logo} height={50} />
         </div>
       )) }
     </div>

@@ -6,9 +6,6 @@ import Header from 'components/Header'
 import Footer from 'layouts/Footer';
 import Tabs from './components/Tabs';
 import BuyCard from './components/BuyCard';
-import { getCards } from '../../services/telco';
-import { useSetRecoilState } from 'recoil';
-import { buyCardState } from 'recoils/buyCardState';
 
 const Type = {
   Card: 'card',
@@ -22,17 +19,23 @@ const tabs = [
   { type: Type.Data, content: 'Mua thẻ data 3G 4G' },
 ]
 
-const Telco = ({ data }) => {
+const Telco = () => {
+  const [data, setData] = useState(null);
   const [type, setType] = useState(Type.Card);
-  const setBuyCardState = useSetRecoilState(buyCardState);
 
   useEffect(() => {
-    setBuyCardState(data);
+    const fetchData = async () => {
+      const res = await fetch('/api/cards');
+      setData(await res.json())
+    }
+    fetchData();
   }, [])
 
   const handleItemClick = (idx) => {
     setType(tabs[idx].type);
   }
+
+  if (!data) return null;
 
   return (
     <footer className={styles.container}>
@@ -55,9 +58,9 @@ const Telco = ({ data }) => {
 
 export default Telco;
 
-export async function getServerSideProps(context) {
-  const data = await getCards();
-  return {
-    props: { data }, // will be passed to the page component as props
-  }
-}
+// export async function getServerSideProps(context) {
+//   const data = await getCards();
+//   return {
+//     props: { data }, // will be passed to the page component as props
+//   }
+// }
