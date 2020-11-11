@@ -8,6 +8,7 @@ import { buyCard } from 'services/telco';
 import { useVisible } from 'hooks/state';
 import Portal from 'layouts/Portal';
 import PayPopup from './PayPopup';
+import Format from 'utils/format';
 
 const BuyCard = ({ data }) => {
   const providers = useMemo(() => {
