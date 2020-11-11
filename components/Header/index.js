@@ -40,7 +40,7 @@ const Header = ({ active }) => {
           ))}
         </Nav>
       </Collapse>
-      <img src={avatarSrc} style={{ width: 40, height: 40, borderRadius: '50%' }} />
+      <img src={avatarSrc} style={{ width: 40, height: 40, borderRadius: '50%' }} style={{ cursor: 'pointer' }} />
     </Navbar>
   );
 }
