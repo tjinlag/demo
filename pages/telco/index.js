@@ -4,8 +4,8 @@ import styles from 'styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from 'components/Header'
 import Footer from 'layouts/Footer';
-import Tabs from './components/Tabs';
-import BuyCard from './components/BuyCard';
+import Tabs from 'components/Telco/Tabs';
+import BuyCard from 'components/Telco/BuyCard';
 import { getCards } from 'services/telco';
 
 const Type = {
