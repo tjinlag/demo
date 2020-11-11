@@ -58,9 +58,9 @@ const Telco = ({ data }) => {
 
 
 Telco.getInitialProps = async (ctx) => {
-  const res = await fetch('http://localhost:12345/api/cards');
-  const data = await res.json()
-  return { data }
+  // const res = await fetch('http://localhost:12345/api/cards');
+  // const data = await res.json()
+  return { data: getCards() }
 }
 
 export default Telco;
