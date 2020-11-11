@@ -6,6 +6,7 @@ import Header from 'components/Header'
 import Footer from 'layouts/Footer';
 import Tabs from './components/Tabs';
 import BuyCard from './components/BuyCard';
+import { getCards } from 'services/telco';
 
 const Type = {
   Card: 'card',
@@ -25,8 +26,7 @@ const Telco = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch('/api/cards');
-      setData(await res.json())
+      setData(getCards());
     }
     fetchData();
   }, [])
@@ -57,10 +57,3 @@ const Telco = () => {
 }
 
 export default Telco;
-
-// export async function getServerSideProps(context) {
-//   const data = await getCards();
-//   return {
-//     props: { data }, // will be passed to the page component as props
-//   }
-// }

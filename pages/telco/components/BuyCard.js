@@ -23,7 +23,7 @@ const BuyCard = ({ data }) => {
   const [selectedProvider, setSelectedProvider] = useState(providers[0]);
   const [selectedCard, setSelectedCard] = useState(null);
   const setLoading = useSetRecoilState(loadingState);
-  const [popupVisible, hidePopup, showPopup] = useVisible(true);
+  const [popupVisible, hidePopup, showPopup] = useVisible(false);
 
   const cards = useMemo(() => {
     const { cards } = data.find(({ provider }) => provider === selectedProvider.name);
@@ -80,7 +80,9 @@ const BuyCard = ({ data }) => {
 
       { popupVisible && (
         <Portal>
-          <PayPopup onClose={hidePopup} providerName={selectedProvider.name} denomination={selectedCard.denomination} />
+          {!!selectedProvider && !!selectedCard && (
+            <PayPopup onClose={hidePopup} providerName={selectedProvider.name} denomination={selectedCard.denomination} />
+          )}
         </Portal>
       )}
     </div>
