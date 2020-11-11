@@ -22,15 +22,7 @@ const tabs = [
 ]
 
 const Telco = ({ data }) => {
-  // const [data, setData] = useState(null);
-  const [type, setType] = useState(Type.Data);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      // setData(getCards());
-    }
-    fetchData();
-  }, [])
+  const [type, setType] = useState(Type.Card);
 
   const handleItemClick = (idx) => {
     setType(tabs[idx].type);
