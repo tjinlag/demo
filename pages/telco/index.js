@@ -20,13 +20,13 @@ const tabs = [
   { type: Type.Data, content: 'Mua thẻ data 3G 4G' },
 ]
 
-const Telco = () => {
-  const [data, setData] = useState(null);
+const Telco = ({ data }) => {
+  // const [data, setData] = useState(null);
   const [type, setType] = useState(Type.Card);
 
   useEffect(() => {
     const fetchData = async () => {
-      setData(getCards());
+      // setData(getCards());
     }
     fetchData();
   }, [])
@@ -56,4 +56,12 @@ const Telco = () => {
   )
 }
 
+
+Telco.getInitialProps = async (ctx) => {
+  const res = await fetch('http://localhost:12345/api/cards');
+  const data = await res.json()
+  return { data }
+}
+
 export default Telco;
+
