@@ -9,6 +9,8 @@ const Providers = ({ data, activeProvider, onItemClick }) => {
     onItemClick(providerName);
   }
 
+  if (!data) return null;
+
   return (
     <div className="d-flex flex-row">
       { data.map(({ name, logo }) => (

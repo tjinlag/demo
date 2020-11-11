@@ -28,6 +28,8 @@ const BuyCard = ({ data }) => {
     console.log('handleCardClick');
   }
 
+  if (!data) return null;
+
   const providers = data.map(({ provider, url }) => ({ name: provider, logo: url }));
   console.log(providers);
   return (

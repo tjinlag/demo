@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Format from 'utils/format';
 
 const Card = ({ data, onClick }) => {
+  if (!data) return null;
   const { denomination, discount, logo = "https://www.vban.vn/Resources/images/logo/viettel1.png" } = data;
   const price = denomination - discount;
   return (
