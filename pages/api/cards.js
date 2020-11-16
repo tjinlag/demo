@@ -4,7 +4,7 @@ const fs = require('fs');
 const { join } = require('path');
 
 export default (req, res) => {
-  const rawdata = fs.readFileSync(join('./public/data', 'card.json'));
+  const rawdata = fs.readFileSync(join(path.resolve('./public', 'data'), 'card.json'));
   const data = JSON.parse(rawdata);
 
   res.statusCode = 200;
