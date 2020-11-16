@@ -1,10 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 const fs = require('fs');
+const { join } = require('path');
 
 export default (req, res) => {
-  const path = join(__dirname, '/data/card.json');
-  const rawdata = fs.readFileSync(path);
+  const rawdata = fs.readFileSync(join('./public/data', 'card.json'));
   const data = JSON.parse(rawdata);
 
   res.statusCode = 200;
