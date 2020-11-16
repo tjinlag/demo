@@ -7,6 +7,8 @@ import Footer from 'layouts/Footer';
 import { randomHistories } from 'utils/history';
 import Format from 'utils/format';
 import Link from 'next/link';
+import fetch from 'isomorphic-fetch';
+import request from 'utils/request';
 
 const History = ({ histories }) => {
   return (
@@ -56,10 +58,11 @@ const History = ({ histories }) => {
 
 export default History;
 
-export const getServerSideProps = (ctx) => {
+export const getServerSideProps = async (ctx) => {
+  const histories = await request('/api/history');
   return {
     props: {
-      histories: randomHistories(),
+      histories,
     }, // will be passed to the page component as props
   }
 }

@@ -4,7 +4,7 @@ import styles from 'styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from 'components/Header'
 import Footer from 'layouts/Footer';
-import { randomHistories } from 'utils/history';
+import request from 'utils/request';
 
 const HistoryDetail = ({ history }) => {
   return (
@@ -25,12 +25,11 @@ const HistoryDetail = ({ history }) => {
 
 export default HistoryDetail;
 
-export const getServerSideProps = (ctx) => {
-  console.log('ctx', ctx);
-  console.log(randomHistories())
+export const getServerSideProps = async (ctx) => {
+  const history = await request(`/api/history/${ctx.params.id}`);
   return {
     props: {
-      history: randomHistories().find((item) => item.id === ctx.params.id) || {},
+      history,
     }, // will be passed to the page component as props
   }
 }
