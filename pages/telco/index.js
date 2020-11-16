@@ -31,7 +31,7 @@ const Telco = ({ data }) => {
   if (!data) return null;
 
   return (
-    <footer className={styles.container}>
+    <div className={styles.container}>
       <Head>
         <title>Buy Telco</title>
       </Head>
@@ -47,7 +47,7 @@ const Telco = ({ data }) => {
       </div>
 
       <Footer />
-    </footer>
+    </div>
   )
 }
 

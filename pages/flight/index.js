@@ -7,7 +7,7 @@ import Footer from 'layouts/Footer';
 
 const Flight = () => {
   return (
-    <footer className={styles.container}>
+    <div className={styles.container}>
       <Head>
         <title>Buy Flight</title>
       </Head>
@@ -21,7 +21,7 @@ const Flight = () => {
       </main>
 
       <Footer />
-    </footer>
+    </div>
   )
 }
 

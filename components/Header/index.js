@@ -17,6 +17,7 @@ const headers = [
   { title: 'Billing', url: '/billing' },
   { title: 'Flight', url: '/flight' },
   { title: 'Tickets', url: '/tickets' },
+  { title: 'History', url: '/history' },
 ]
 
 const logoSrc = 'https://toppng.com/uploads/preview/luffy-anime-one-piece-luffy-115628753714bjr6ypxar.png'

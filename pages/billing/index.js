@@ -7,7 +7,7 @@ import Footer from 'layouts/Footer';
 
 const Billing = () => {
   return (
-    <footer className={styles.container}>
+    <div className={styles.container}>
       <Head>
         <title>Billing</title>
       </Head>
@@ -21,7 +21,7 @@ const Billing = () => {
       </main>
 
       <Footer />
-    </footer>
+    </div>
   )
 }
 

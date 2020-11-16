@@ -7,7 +7,7 @@ import Footer from 'layouts/Footer';
 
 const Tickets = () => {
   return (
-    <footer className={styles.container}>
+    <div className={styles.container}>
       <Head>
         <title>Buy tickets</title>
       </Head>
@@ -21,7 +21,7 @@ const Tickets = () => {
       </main>
 
       <Footer />
-    </footer>
+    </div>
   )
 }
 
