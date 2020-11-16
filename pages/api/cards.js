@@ -3,9 +3,9 @@
 const fs = require('fs');
 
 export default (req, res) => {
-  const rawdata = fs.readFileSync('./data/card.json');
+  const rawdata = fs.readFileSync('/data/card.json');
   const data = JSON.parse(rawdata);
 
-  res.statusCode = 200
-  res.json(data)
+  res.statusCode = 200;
+  res.json(data);
 }
