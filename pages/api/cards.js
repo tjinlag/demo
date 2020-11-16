@@ -3,7 +3,8 @@
 const fs = require('fs');
 
 export default (req, res) => {
-  const rawdata = fs.readFileSync('https://demo-fawn.vercel.app/data/card.json');
+  const path = join(__dirname, '/data/card.json');
+  const rawdata = fs.readFileSync(path);
   const data = JSON.parse(rawdata);
 
   res.statusCode = 200;
